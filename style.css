@@ -21,6 +21,7 @@ body {
     background-color: #444;
     color: white;
     padding: 20px;
+    padding-top: 3em;
     border-radius: 15px 15px 0 0;
 }
 
@@ -67,4 +68,8 @@ button:hover {
 #equals {
     background-color: #0f0;
     font-weight: bold;
+}
+
+.campo {
+    padding: 1em;
 }
