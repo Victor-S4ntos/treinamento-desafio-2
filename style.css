@@ -73,3 +73,11 @@ button:hover {
 .campo {
     padding: 1em;
 }
+
+.apagar{
+    background-color: orange;
+}
+
+.apagar:hover {
+    background-color: orange;
+}

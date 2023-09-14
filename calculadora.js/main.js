@@ -1,13 +1,19 @@
-//classe calculadora -----------------------------------
+//classe calculadora ------------------------------------------
 class Calculadora {
     constructor(valorA, valorB, operacao) {
-      this._valorA = valorA;
-      this._operacao = operacao;
-      this._valorB = valorB;
+      this._valorA = valorA
+      this._operacao = operacao
+      this._valorB = valorB
     }
-    
+
     conta() {
-      if(this._operacao === '+') {
+
+      const operadores = ['+', '-', 'x', '/']
+
+      if(!operadores.includes(this._operacao)) {
+        throw new Error('operador(es) invalido(os)')
+      } 
+      else if(this._operacao === '+') {
         return this._valorA + this._valorB 
       }
       else if (this._operacao === '-') {
@@ -19,28 +25,54 @@ class Calculadora {
       else if(this._operacao === '/') {
         return this._valorA / this._valorB
       }
-      else {
-        alert('operador(es) inexistente(es)')
-      }
     }
-}
 
-const contar = new Calculadora (20, 10, '+')
-console.log(contar, "  resultado da conta:", contar.conta())
+    apagarDigito(digito) {
+      
+    }
+  }
 
-//exbir no campo -----------------
+//exbir no campo ----------------------------------------
 const camposDeExibicao = document.querySelector('.display')
-const botoes = document.querySelectorAll('.botoes')
+const botoesOperadores = document.querySelectorAll('.operator');
+const botoesNumerados = document.querySelectorAll('.operator_');
 
-botoes.forEach((botao) => {
+botoesOperadores.forEach((botao) => {
+  botao.addEventListener("click", () => {
+
+  const textoBotao = botao.innerHTML; 
+
+
+  camposDeExibicao.innerHTML += textoBotao; 
+  })
+})
+
+botoesNumerados.forEach((botao) => {
   botao.addEventListener("click", () => {
 
    const textoBotao = botao.innerHTML; 
 
-    camposDeExibicao.innerHTML += textoBotao; 
+  camposDeExibicao.innerHTML += textoBotao; 
   })
 })
 
-//limpar campo ----------------
-const botaoLimpar = document.getElementById('clear')
-botaoLimpar.addEventListener("click", () => {camposDeExibicao.innerHTML=""})
+//exibir conta ------------------------------------------
+const botaoIgual = document.getElementById('equals');
+const calculadora = new Calculadora() 
+botaoIgual.addEventListener("click", () => {
+
+});
+
+//limpar campo ---------------------------------------------
+const botaoLimpar = document.getElementById('clear');
+botaoLimpar.addEventListener("click", () => {camposDeExibicao.innerHTML=""});
+
+//apagar digito --------------------------------------------
+const botaoApagarDigito = document.getElementById('apagar')
+botaoApagarDigito.addEventListener("click", () => {
+
+  if(camposDeExibicao.innerHTML.length > 0) {
+    const deletar = camposDeExibicao.innerHTML.slice(0, -1)
+    camposDeExibicao.innerHTML = deletar
+  }
+})
