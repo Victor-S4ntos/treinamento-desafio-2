@@ -60,14 +60,14 @@ botaoApagarDigito.addEventListener("click", () => {
   }
 });
 
-//limpar campo --------------------------------------------------------
+//limpar campo ---------------------------------------------------------
 const botaoLimpar = document.getElementById('clear');
 botaoLimpar.addEventListener("click", () => {camposDeExibicao.innerHTML = ""});
 
-//exibir resultado da conta -------------------------------------------
+//exibir resultado da conta --------------------------------------------
 botaoIgual.addEventListener("click", () => {
   const operadores = ['+', '-', 'x', '/'];
-  const operacao = camposDeExibicao.innerHTML.split('').find(operar => operadores.includes(operar)) || '';
+  const operacao = camposDeExibicao.innerHTML.split('').find(operar => operadores.includes(operar));
   const expressao = camposDeExibicao.innerHTML.replace(/\./g, ',');
   const [valorA, valorB] = expressao.split(operacao).map(item => item.replace(/,/g, '.')); 
   const resultado = new Calculadora(parseFloat(valorA), operacao, parseFloat(valorB)).conta();
