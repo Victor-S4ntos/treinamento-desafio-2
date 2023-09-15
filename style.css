@@ -81,3 +81,18 @@ button:hover {
 .apagar:hover {
     background-color: orange;
 }
+
+@media screen and (max-width: 600px) {
+    .calculator {
+        width: 90%;
+    }
+    
+    .buttons {
+        padding: 0px, 20px; 
+    }
+    
+    button {
+        font-size: 20px;
+        padding: 10px 15px;
+    }
+}
