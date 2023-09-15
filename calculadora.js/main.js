@@ -1,3 +1,10 @@
+const operacoes = {
+  ADICAO: '+',
+  SUBTRACAO: '-',
+  MULTIPLICACAO: 'x',
+  DIVISAO: '/'
+}
+
 //classe calculadora -------------------------------------------
 class Calculadora {
   constructor(valorA, operacao, valorB) {
@@ -7,19 +14,19 @@ class Calculadora {
   }
 
   conta() {
-    if (this._operacao === '+') {
+    if (this._operacao === operacoes.ADICAO) {
       return this._valorA + this._valorB
     }
-    else if (this._operacao === '-') {
+    else if (this._operacao === operacoes.SUBTRACAO) {
       return this._valorA - this._valorB
     }
-    else if (this._operacao === 'x') {
+    else if (this._operacao === operacoes.MULTIPLICACAO) {
       return this._valorA * this._valorB
     }
-    else if (this._operacao === '/') {
+    else if (this._operacao === operacoes.DIVISAO) {
       return this._valorA / this._valorB
     } else {
-      throw new Error('Falha ao fazer a operação')
+      throw new Error('Falha ao fazer a operação');
     }
   }
 }
@@ -44,16 +51,6 @@ botoesNumerados.forEach((botao) => {
   });
 });
 
-//exibir resultado da conta ------------------------------------------
-botaoIgual.addEventListener("click", () => {
-  const operadores = ['+', '-', 'x', '/'];
-  const operacao = camposDeExibicao.innerHTML.split('').find(operar => operadores.includes(operar)) || '';
-  const [valorA, valorB] = camposDeExibicao.innerHTML.split(operacao).map(parseFloat);
-  const resultado = new Calculadora(valorA, operacao, valorB,).conta();
-  console.log("resultado da conta:", resultado);
-  camposDeExibicao.innerHTML = resultado;
-});
-
 //apagar digito -------------------------------------------------------
 const botaoApagarDigito = document.getElementById('apagar');
 botaoApagarDigito.addEventListener("click", () => {
@@ -66,3 +63,14 @@ botaoApagarDigito.addEventListener("click", () => {
 //limpar campo --------------------------------------------------------
 const botaoLimpar = document.getElementById('clear');
 botaoLimpar.addEventListener("click", () => {camposDeExibicao.innerHTML = ""});
+
+//exibir resultado da conta -------------------------------------------
+botaoIgual.addEventListener("click", () => {
+  const operadores = ['+', '-', 'x', '/'];
+  const operacao = camposDeExibicao.innerHTML.split('').find(operar => operadores.includes(operar)) || '';
+  const expressao = camposDeExibicao.innerHTML.replace(/\./g, ',');
+  const [valorA, valorB] = expressao.split(operacao).map(item => item.replace(/,/g, '.')); 
+  const resultado = new Calculadora(parseFloat(valorA), operacao, parseFloat(valorB)).conta();
+  console.log("resultado da conta:", resultado);
+  camposDeExibicao.innerHTML = resultado.toString().replace(/\./g, ',');
+});
