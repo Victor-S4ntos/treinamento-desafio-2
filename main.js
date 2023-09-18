@@ -70,8 +70,8 @@ botaoIgual.addEventListener("click", () => {
   const [valorA, valorB] = expressao.split(operacao).map(item => item.replace(/,/g, '.')); 
   const resultado = new Calculadora(parseFloat(valorA), operacao, parseFloat(valorB)).conta();
   if(isNaN(resultado)) {
-    console.log('erro ao fazer a operação')
-    campoDeExibicao.innerHTML = `erro ao fazer a operação`
+    console.log('erro ao fazer a operação (operação não suportada).')
+    campoDeExibicao.innerHTML = `erro ao fazer a operação.`
     return
   }else {
     console.log("Operação da conta:", valorA, operacao, valorB, "=", resultado);
