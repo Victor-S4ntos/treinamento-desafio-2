@@ -1,3 +1,4 @@
+//enumerador das operações ------------------------------------------------
 const operacoes = {
   ADICAO: '+',
   SUBTRACAO: '-',
@@ -26,7 +27,7 @@ class Calculadora {
     else if (this._operacao === operacoes.DIVISAO) {
       return this._valorA / this._valorB
     }else {
-      throw new Error ('escreva uma operação')
+      throw new Error ('FAÇA UMA CONTA')
     }
   }
 }
@@ -34,18 +35,18 @@ class Calculadora {
 const campoDeExibicao = document.querySelector('.display');//campo do display da calculadora -----------------------
 const botoesOperadores = document.querySelectorAll('.operator');//botões de operação como: +, -, x e / --------------------------
 const botoesNumeradosEVirgula = document.querySelectorAll('.operator_');//botões de numeros do 0 ao 9 e a virgula(,) ---------------------------
-const botaoIgual = document.getElementById('igual');//botão para exibir o resultado de toda a operação, o igual(=) -------------------------------
+const botaoIgual = document.getElementById('igual');//botão para exibir o resultado de toda a operação, o igual(=) ---------------------------------
 
 //exbir no campo ------------------------------------------------------
 botoesOperadores.forEach((botao) => {
   botao.addEventListener("click", () => {
-    campoDeExibicao.innerHTML +=  botao.innerHTML;;
+    campoDeExibicao.innerHTML +=  botao.innerHTML;
   });
 });
 
 botoesNumeradosEVirgula.forEach((botao) => {
   botao.addEventListener("click", () => {
-    campoDeExibicao.innerHTML += botao.innerHTML;;
+    campoDeExibicao.innerHTML += botao.innerHTML;
   });
 });
 
@@ -53,8 +54,7 @@ botoesNumeradosEVirgula.forEach((botao) => {
 const botaoApagarDigito = document.getElementById('apagar');
 botaoApagarDigito.addEventListener("click", () => {
   if (campoDeExibicao.innerHTML.length > 0) {
-    const deletar = campoDeExibicao.innerHTML.slice(0, -1);
-    campoDeExibicao.innerHTML = deletar
+    campoDeExibicao.innerHTML = campoDeExibicao.innerHTML.slice(0, -1);
   }
 });
 
@@ -69,10 +69,12 @@ botaoIgual.addEventListener("click", () => {
   const expressao = campoDeExibicao.innerHTML.replace(/\./g, ',');
   const [valorA, valorB] = expressao.split(operacao).map(item => item.replace(/,/g, '.')); 
   const resultado = new Calculadora(parseFloat(valorA), operacao, parseFloat(valorB)).conta();
-  console.log("resultado da conta:", resultado);
-  campoDeExibicao.innerHTML = resultado.toString().replace(/\./g, ',');
   if(isNaN(resultado)) {
+    console.log('erro ao fazer a operação')
     campoDeExibicao.innerHTML = `erro ao fazer a operação`
     return
+  }else {
+    console.log("Operação da conta:", valorA, operacao, valorB, "=", resultado);
   }
+  campoDeExibicao.innerHTML = resultado.toString().replace(/\./g, ',');
 });
