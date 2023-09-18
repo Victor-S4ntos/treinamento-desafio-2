@@ -64,15 +64,15 @@ botaoApagarDigito.addEventListener("click", () => {
 const botaoLimpar = document.getElementById('clear');
 botaoLimpar.addEventListener("click", () => {camposDeExibicao.innerHTML = ""});
 
-//exibir resultado da conta --------------------------------------------
+//exibir resultado da conta ---------------------------------------------
 botaoIgual.addEventListener("click", () => {
   const operadores = ['+', '-', 'x', '/'];
   const operacao = camposDeExibicao.innerHTML.split('').find(operar => operadores.includes(operar));
   const expressao = camposDeExibicao.innerHTML.replace(/\./g, ',');
   const [valorA, valorB] = expressao.split(operacao).map(item => item.replace(/,/g, '.')); 
-  if (isNaN(valorA) || isNaN(valorB)) {
-    camposDeExibicao.innerHTML = "Erro ao fazer a operação";
-    return;
+  if(isNaN(valorA) || isNaN(valorB) || isNaN(operacao)) {
+    camposDeExibicao.innerHTML = `erro ao fazer a operação`
+    return
   }
   const resultado = new Calculadora(parseFloat(valorA), operacao, parseFloat(valorB)).conta();
   console.log("resultado da conta:", resultado);
