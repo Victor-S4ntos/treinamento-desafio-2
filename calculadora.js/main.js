@@ -31,50 +31,50 @@ class Calculadora {
   }
 }
 
-const camposDeExibicao = document.querySelector('.display');//campo do display da calculadora ----------------------
+const campoDeExibicao = document.querySelector('.display');//campo do display da calculadora -----------------------
 const botoesOperadores = document.querySelectorAll('.operator');//botões de operação como: +, -, x e / --------------------------
-const botoesNumerados = document.querySelectorAll('.operator_');//botões de numeros do 0 ao 9 e a virgula(,) ---------------------------
-const botaoIgual = document.getElementById('equals');//botão para exibir o resultado de toda a operação, o igual(=) -------------------------------
+const botoesNumeradosEVirgula = document.querySelectorAll('.operator_');//botões de numeros do 0 ao 9 e a virgula(,) ---------------------------
+const botaoIgual = document.getElementById('igual');//botão para exibir o resultado de toda a operação, o igual(=) -------------------------------
 
-//exbir no campo -----------------------------------------------------
+//exbir no campo ------------------------------------------------------
 botoesOperadores.forEach((botao) => {
   botao.addEventListener("click", () => {
     const textoBotao = botao.innerHTML;
-    camposDeExibicao.innerHTML += textoBotao;
+    campoDeExibicao.innerHTML += textoBotao;
   });
 });
 
-botoesNumerados.forEach((botao) => {
+botoesNumeradosEVirgula.forEach((botao) => {
   botao.addEventListener("click", () => {
     const textoBotao = botao.innerHTML;
-    camposDeExibicao.innerHTML += textoBotao;
+    campoDeExibicao.innerHTML += textoBotao;
   });
 });
 
-//apagar digito -------------------------------------------------------
+//apagar digito --------------------------------------------------------
 const botaoApagarDigito = document.getElementById('apagar');
 botaoApagarDigito.addEventListener("click", () => {
-  if (camposDeExibicao.innerHTML.length > 0) {
-    const deletar = camposDeExibicao.innerHTML.slice(0, -1);
-    camposDeExibicao.innerHTML = deletar
+  if (campoDeExibicao.innerHTML.length > 0) {
+    const deletar = campoDeExibicao.innerHTML.slice(0, -1);
+    campoDeExibicao.innerHTML = deletar
   }
 });
 
-//limpar campo ---------------------------------------------------------
-const botaoLimpar = document.getElementById('clear');
-botaoLimpar.addEventListener("click", () => {camposDeExibicao.innerHTML = ""});
+//limpar campo ----------------------------------------------------------
+const botaoLimpar = document.getElementById('limpar');
+botaoLimpar.addEventListener("click", () => {campoDeExibicao.innerHTML = ""});
 
-//exibir resultado da conta ---------------------------------------------
+//fazer o calculo e exibir resultado da conta ----------------------------------------------
 botaoIgual.addEventListener("click", () => {
   const operadores = ['+', '-', 'x', '/'];
-  const operacao = camposDeExibicao.innerHTML.split('').find(operar => operadores.includes(operar));
-  const expressao = camposDeExibicao.innerHTML.replace(/\./g, ',');
+  const operacao = campoDeExibicao.innerHTML.split('').find(operar => operadores.includes(operar));
+  const expressao = campoDeExibicao.innerHTML.replace(/\./g, ',');
   const [valorA, valorB] = expressao.split(operacao).map(item => item.replace(/,/g, '.')); 
-  if(isNaN(valorA) || isNaN(valorB) || isNaN(operacao)) {
-    camposDeExibicao.innerHTML = `erro ao fazer a operação`
+  if(isNaN(valorA) || isNaN(valorB)) {
+    campoDeExibicao.innerHTML = `erro ao fazer a operação`
     return
   }
   const resultado = new Calculadora(parseFloat(valorA), operacao, parseFloat(valorB)).conta();
   console.log("resultado da conta:", resultado);
-  camposDeExibicao.innerHTML = resultado.toString().replace(/\./g, ',');
+  campoDeExibicao.innerHTML = resultado.toString().replace(/\./g, ',');
 });
