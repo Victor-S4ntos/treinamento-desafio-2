@@ -5,7 +5,7 @@ const operacoes = {
   DIVISAO: '/'
 }
 
-//classe calculadora -------------------------------------------
+//classe calculadora ---------------------------------------------
 class Calculadora {
   constructor(valorA, operacao, valorB) {
     this._valorA = valorA
@@ -36,7 +36,7 @@ const botoesOperadores = document.querySelectorAll('.operator');//botões de ope
 const botoesNumerados = document.querySelectorAll('.operator_');//botões de numeros do 0 ao 9 e a virgula(,) ---------------------------
 const botaoIgual = document.getElementById('equals');//botão para exibir o resultado de toda a operação, o igual(=) -------------------------------
 
-//exbir no campo ---------------------------------------------------
+//exbir no campo -----------------------------------------------------
 botoesOperadores.forEach((botao) => {
   botao.addEventListener("click", () => {
     const textoBotao = botao.innerHTML;
@@ -70,6 +70,10 @@ botaoIgual.addEventListener("click", () => {
   const operacao = camposDeExibicao.innerHTML.split('').find(operar => operadores.includes(operar));
   const expressao = camposDeExibicao.innerHTML.replace(/\./g, ',');
   const [valorA, valorB] = expressao.split(operacao).map(item => item.replace(/,/g, '.')); 
+  if (isNaN(valorA) || isNaN(valorB)) {
+    camposDeExibicao.innerHTML = "Erro ao fazer a operação";
+    return;
+  }
   const resultado = new Calculadora(parseFloat(valorA), operacao, parseFloat(valorB)).conta();
   console.log("resultado da conta:", resultado);
   camposDeExibicao.innerHTML = resultado.toString().replace(/\./g, ',');
