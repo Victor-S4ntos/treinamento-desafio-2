@@ -45,9 +45,9 @@ class Calculadora {
       case operacoes.MULTIPLICACAO: return this._valorA * this._valorB
       case operacoes.DIVISAO: if(this._valorB === 0) {
         campoDeExibicao.innerHTML = `O número ${this._valorA} não pode ser divido por ${this._valorB}`
-        setTimeout(() => {campoDeExibicao.innerHTML = `${this._valorA += this._operacao}`}, 2300)
+        setTimeout(() => {campoDeExibicao.innerHTML = `${this._valorA += this._operacao}`}, 2200);
       }else { return this._valorA / this._valorB }
-      default: throw new Error ('FAÇA UMA OPERAÇÃO')
+      default: throw new Error ('FAÇA UMA OPERAÇÃO');
     }
   }
 }
@@ -60,7 +60,7 @@ const botaoIgual = document.getElementById('igual');//botão para exibir o resul
 //exbir no campo ------------------------------------------------------
 botoesOperadores.forEach((botao) => {
   botao.addEventListener("click", () => {
-    campoDeExibicao.innerHTML +=  botao.innerHTML;
+    campoDeExibicao.innerHTML += '  ' + botao.innerHTML + '  ';
   });
 });
 
@@ -88,17 +88,14 @@ const resultado = new Calculadora();
 botaoIgual.addEventListener("click", () => {
   const operadores = ['+', '-', 'x', '/'];
   const operacao = campoDeExibicao.innerHTML.split('').find(operar => operadores.includes(operar));
-  const expressao = campoDeExibicao.innerHTML.replace('.', ',');
-  const [valorA, valorB] = expressao.split(operacao).map(item => item.replace(',', '.'));
-
+  const [valorA, valorB] =  campoDeExibicao.innerHTML.split(operacao).map(item => item.replace(',', '.'));
   resultado.valorA = parseFloat(valorA);
   resultado.operacao = operacao;
   resultado.valorB = parseFloat(valorB);
-
   if(isNaN(resultado.conta())){
-    console.log('erro ao fazer a operação (operação não suportada).')
+    console.log('erro ao fazer a operação (operação não suportada).');
     campoDeExibicao.innerHTML = `erro ao fazer a operação.`
-    setTimeout(()=> {campoDeExibicao.innerHTML = ''}, 1800)
+    setTimeout(()=> {campoDeExibicao.innerHTML = ''}, 1800);
     return
   }else { console.log("Operação da conta:", valorA, operacao, valorB, "=", resultado.conta()); }
   campoDeExibicao.innerHTML = resultado.conta().toString().replace('.', ',');
