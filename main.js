@@ -1,4 +1,3 @@
-//enumerador das operações ------------------------------------------------
 const operacoes = {
   ADICAO: '+',
   SUBTRACAO: '-',
@@ -6,28 +5,49 @@ const operacoes = {
   DIVISAO: '/'
 }
 
-//classe calculadora ---------------------------------------------
+// Classe Calculadora
 class Calculadora {
-  constructor(valorA, operacao, valorB) {
-    this._valorA = valorA
-    this._operacao = operacao
-    this._valorB = valorB
+  constructor() {
+    this._valorA = 0
+    this._operacao = '';
+    this._valorB = 0
+  }
+
+  //metodos para armazenar e atualizar os valores ------------------------------------------------
+  get valorA() {
+    return this._valorA;
+  }
+
+  set valorA(valor) {
+    this._valorA = valor;
+  }
+
+  get operacao() {
+    return this._operacao;
+  }
+
+  set operacao(operacao) {
+    this._operacao = operacao;
+  }
+
+  get valorB() {
+    return this._valorB;
+  }
+
+  set valorB(valor) {
+    this._valorB = valor;
   }
 
   conta() {
-    if (this._operacao === operacoes.ADICAO) {
-      return this._valorA + this._valorB
-    }
-    else if (this._operacao === operacoes.SUBTRACAO) {
-      return this._valorA - this._valorB
-    }
-    else if (this._operacao === operacoes.MULTIPLICACAO) {
-      return this._valorA * this._valorB
-    }
-    else if (this._operacao === operacoes.DIVISAO) {
-      return this._valorA / this._valorB
-    }else {
-      throw new Error ('FAÇA UMA CONTA')
+    switch(this._operacao) {
+      case operacoes.ADICAO: return this._valorA + this._valorB
+      case operacoes.SUBTRACAO: return this._valorA - this._valorB
+      case operacoes.MULTIPLICACAO: return this._valorA * this._valorB
+      case operacoes.DIVISAO: if(this._valorB === 0) {
+        campoDeExibicao.innerHTML = `O número ${this._valorA} não pode ser divido por ${this._valorB}`
+        setTimeout(() => {campoDeExibicao.innerHTML = `${this._valorA += this._operacao}`}, 2300)
+      }else { return this._valorA / this._valorB }
+      default: throw new Error ('FAÇA UMA OPERAÇÃO')
     }
   }
 }
@@ -63,18 +83,23 @@ const botaoLimpar = document.getElementById('limpar');
 botaoLimpar.addEventListener("click", () => {campoDeExibicao.innerHTML = ""});
 
 //fazer o calculo e exibir resultado da conta ----------------------------------------------
+const resultado = new Calculadora();
+
 botaoIgual.addEventListener("click", () => {
   const operadores = ['+', '-', 'x', '/'];
   const operacao = campoDeExibicao.innerHTML.split('').find(operar => operadores.includes(operar));
-  const expressao = campoDeExibicao.innerHTML.replace(/\./g, ',');
-  const [valorA, valorB] = expressao.split(operacao).map(item => item.replace(/,/g, '.')); 
-  const resultado = new Calculadora(parseFloat(valorA), operacao, parseFloat(valorB)).conta();
-  if(isNaN(resultado)) {
+  const expressao = campoDeExibicao.innerHTML.replace('.', ',');
+  const [valorA, valorB] = expressao.split(operacao).map(item => item.replace(',', '.'));
+
+  resultado.valorA = parseFloat(valorA);
+  resultado.operacao = operacao;
+  resultado.valorB = parseFloat(valorB);
+
+  if(isNaN(resultado.conta())){
     console.log('erro ao fazer a operação (operação não suportada).')
     campoDeExibicao.innerHTML = `erro ao fazer a operação.`
+    setTimeout(()=> {campoDeExibicao.innerHTML = ''}, 1800)
     return
-  }else {
-    console.log("Operação da conta:", valorA, operacao, valorB, "=", resultado);
-  }
-  campoDeExibicao.innerHTML = resultado.toString().replace(/\./g, ',');
+  }else { console.log("Operação da conta:", valorA, operacao, valorB, "=", resultado.conta()); }
+  campoDeExibicao.innerHTML = resultado.conta().toString().replace('.', ',');
 });
