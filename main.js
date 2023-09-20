@@ -7,10 +7,10 @@ const operacoes = {
 
 // Classe Calculadora
 class Calculadora {
-  constructor() {
-    this._valorA = 0
-    this._operacao = '';
-    this._valorB = 0
+  constructor(valorA, operacao, valorB) {
+    this._valorA = valorA;
+    this._operacao = operacao;
+    this._valorB = valorB;
   }
 
   //metodos para armazenar e atualizar os valores ------------------------------------------------
@@ -45,7 +45,7 @@ class Calculadora {
       case operacoes.MULTIPLICACAO: return this._valorA * this._valorB
       case operacoes.DIVISAO: if(this._valorB === 0) {
         campoDeExibicao.innerHTML = `O número ${this._valorA} não pode ser divido por ${this._valorB}`
-        setTimeout(() => {campoDeExibicao.innerHTML = `${this._valorA += this._operacao}`}, 2200);
+        setTimeout(() => {campoDeExibicao.innerHTML = `${this._valorA += this._operacao}`}, 2000);
       }else { return this._valorA / this._valorB }
       default: throw new Error ('FAÇA UMA OPERAÇÃO');
     }
@@ -55,7 +55,7 @@ class Calculadora {
 const campoDeExibicao = document.querySelector('.display');//campo do display da calculadora -----------------------
 const botoesOperadores = document.querySelectorAll('.operator');//botões de operação como: +, -, x e / --------------------------
 const botoesNumeradosEVirgula = document.querySelectorAll('.operator_');//botões de numeros do 0 ao 9 e a virgula(,) ---------------------------
-const botaoIgual = document.getElementById('igual');//botão para exibir o resultado de toda a operação, o igual(=) ---------------------------------
+const botaoIgual = document.getElementById('igual');//botão para exibir o resultado de toda a operação, o igual(=) ------------------------------------
 
 //exbir no campo ------------------------------------------------------
 botoesOperadores.forEach((botao) => {
@@ -95,7 +95,7 @@ botaoIgual.addEventListener("click", () => {
   if(isNaN(resultado.conta())){
     console.log('erro ao fazer a operação (operação não suportada).');
     campoDeExibicao.innerHTML = `erro ao fazer a operação.`
-    setTimeout(()=> {campoDeExibicao.innerHTML = ''}, 1800);
+    setTimeout(()=> {campoDeExibicao.innerHTML = ''}, 1500);
     return
   }else { console.log("Operação da conta:", valorA, operacao, valorB, "=", resultado.conta()); }
   campoDeExibicao.innerHTML = resultado.conta().toString().replace('.', ',');
