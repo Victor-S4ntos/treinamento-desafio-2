@@ -45,7 +45,7 @@ class Calculadora {
       case operacoes.MULTIPLICACAO: return this._valorA * this._valorB
       case operacoes.DIVISAO: if(this._valorB === 0) {
         campoDeExibicao.innerHTML = `O número ${this._valorA} não pode ser divido por ${this._valorB}`
-        setTimeout(() => {campoDeExibicao.innerHTML = `${this._valorA += this._operacao}`}, 2000);
+        setTimeout(() => {campoDeExibicao.innerHTML = `${this._valorA += '  ' + this._operacao+ '  '}`}, 1400);
       }else { return this._valorA / this._valorB }
       default: throw new Error ('FAÇA UMA OPERAÇÃO');
     }
@@ -95,7 +95,7 @@ botaoIgual.addEventListener("click", () => {
   if(isNaN(resultado.conta())){
     console.log('erro ao fazer a operação (operação não suportada).');
     campoDeExibicao.innerHTML = `erro ao fazer a operação.`
-    setTimeout(()=> {campoDeExibicao.innerHTML = ''}, 1500);
+    setTimeout(()=> {campoDeExibicao.innerHTML = ''}, 1200);
     return
   }else { console.log("Operação da conta:", valorA, operacao, valorB, "=", resultado.conta()); }
   campoDeExibicao.innerHTML = resultado.conta().toString().replace('.', ',');

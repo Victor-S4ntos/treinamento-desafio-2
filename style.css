@@ -97,6 +97,15 @@ button:hover {
 
 .apagar {
     background-color: orange;
+    background-size: contain;
+    width: 100px; 
+    height: 70px;
+    justify-content: center;
+    text-align: center;
+}
+
+img {
+    height: 3.5vh;
 }
 
 .apagar:hover {
