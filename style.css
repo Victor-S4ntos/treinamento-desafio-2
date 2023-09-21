@@ -105,7 +105,8 @@ button:hover {
 }
 
 img {
-    height: 3.5vh;
+    height: 3.99vh;
+    padding: 0em 0em 5em 0em;
 }
 
 .apagar:hover {
