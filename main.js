@@ -5,7 +5,7 @@ const operacoes = {
   DIVISAO: '/'
 }
 
-// Classe Calculadora
+// Classe Calculadora ---------------------------------------------------------------------------
 class Calculadora {
   constructor(valorA, operacao, valorB) {
     this._valorA = valorA;
@@ -88,7 +88,7 @@ const resultado = new Calculadora();
 botaoIgual.addEventListener("click", () => {
   const operadores = ['+', '-', 'x', '/'];
   const operacao = campoDeExibicao.innerHTML.split('').find(operar => operadores.includes(operar));
-  const [valorA, valorB] =  campoDeExibicao.innerHTML.split(operacao).map(item => item.replace(',', '.'));
+  const [valorA, valorB] = campoDeExibicao.innerHTML.split(operacao).map(item => item.replace(',', '.'));
   resultado.valorA = parseFloat(valorA);
   resultado.operacao = operacao;
   resultado.valorB = parseFloat(valorB);
