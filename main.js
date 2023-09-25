@@ -60,6 +60,9 @@ const botaoIgual = document.getElementById('igual');//botão para exibir o resul
 //exbir no campo ------------------------------------------------------
 botoesOperadores.forEach((botao) => {
   botao.addEventListener("click", () => {
+    if (campoDeExibicao.innerHTML.slice(-1) === " " && botao.innerHTML !== " " && botao.innerHTML !== operacoes) {
+      return;
+    }
     campoDeExibicao.innerHTML += '  ' + botao.innerHTML + '  ';
   });
 });
