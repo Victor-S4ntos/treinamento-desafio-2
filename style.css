@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+
 body {
     font-family: Arial, sans-serif;
     background: linear-gradient(90deg, rgba(39, 40, 41, 1) 0%, rgba(97, 116, 122, 1) 94%);
@@ -30,6 +32,7 @@ header h1 {
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
     width: 500px;
     text-align: center;
+    position: fixed;
 }
 
 .display {
@@ -39,10 +42,76 @@ header h1 {
     border-radius: 15px 15px 0 0;
     height: 20px;
     font-size: 2rem;
-    display: flex; 
-    justify-content: center; 
-    align-items: center; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
     overflow: hidden;
+    position: relative;
+}
+
+.historico {
+
+    margin-bottom: 32.3em;
+    margin-left: 15em;
+    position: fixed;
+
+}
+
+.historico-label {
+
+    position: fixed;
+}
+
+.historico-span-imagem {
+    width: 30px;
+    height: 30px;
+    vertical-align: middle;
+
+}
+
+.historico-label {
+    margin-left: 5em;
+    cursor: pointer;
+}
+
+.lista {
+    background-color: rgba(39, 40, 41, 0.8);
+    color: white;
+    padding: 10px;
+    border-radius: 15px;
+    position: fixed;
+    top: 90px; 
+    right: 10px; 
+    text-align: center;
+    display: none;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.historico-titulo {
+    font-family: 'Open Sans', sans-serif;
+    padding: 0;
+}
+
+#historico-lista {
+    list-style: none;
+    padding: 0;
+}
+
+#menu:checked ~ .lista { 
+    display: block;
+}
+
+.caixaDoHistorico {
+    display: none;
+}
+
+li {
+    color: white;
+    font-size: 1.5em;
+    word-wrap: break-word;
+    padding-bottom: .4em;
+    max-width: 300px;
 }
 
 .buttons {
@@ -67,7 +136,7 @@ button:hover {
     background-color: #777;
 }
 
-.operator {
+.operador {
     background-color: #f66;
     color: white;
 }
@@ -95,6 +164,23 @@ button:hover {
     padding: 1em;
 }
 
+.apagar_console {
+    background-color: #4F709C;
+    background-image: url('./imagem/excluir(3).png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 2.5rem;
+    color: white;
+    justify-content: center;
+    text-align: center;
+    padding: 0;
+    cursor: pointer;
+}
+
+.apagar_console:hover {
+    background-color: #51699b;
+}
+
 .apagar {
     background-color: orange;
     background-size: contain;
@@ -110,8 +196,8 @@ footer {
     background: linear-gradient(0deg, rgba(50,52,55,1) 20%, rgba(51,51,51,1) 82%);
     width: 100%;
     text-align: center;
-    position: fixed; 
-    bottom: 0; 
+    position: fixed;
+    bottom: 0;
 }
 
 footer h2 {
