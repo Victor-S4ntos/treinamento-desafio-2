@@ -13,7 +13,6 @@ class Calculadora {
     this._valorA = valorA;
     this._operacao = operacao;
     this._valorB = valorB;
-    this._pilha = []
   }
   
 //metodos para armazenar e atualizar os valores ------------------------------------------------- 
